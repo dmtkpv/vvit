@@ -1,0 +1,6 @@
+{
+  "name": "vvit",
+  "scripts": {
+    "app": "pnpm --filter @vvit/app"
+  }
+}
