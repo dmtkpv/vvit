@@ -17,6 +17,9 @@ importers:
       '@twa-dev/sdk':
         specifier: ^7.0.0
         version: 7.0.0(react@18.3.1)
+      gsap:
+        specifier: ^3.12.5
+        version: 3.12.5
       vue:
         specifier: ^3.4.27
         version: 3.4.27
@@ -1036,6 +1039,10 @@ packages:
     resolution: {integrity: sha512-d65bNlIadxvpb/A2abVdlqKqV563juRnZ1Wtk6s1sIR8uNsXR70xqIzVqxVf1eTqDunwT2MkczEeaezCKTZhwA==}
     dependencies:
       get-intrinsic: 1.2.4
+    dev: false
+
+  /gsap@3.12.5:
+    resolution: {integrity: sha512-srBfnk4n+Oe/ZnMIOXt3gT605BX9x5+rh/prT2F1SsNJsU1XuMiP0E2aptW481OnonOGACZWBqseH5Z7csHxhQ==}
     dev: false
 
   /har-schema@2.0.0:

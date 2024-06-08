@@ -12,6 +12,7 @@
         height: 100%;
         font-family: Arial, sans-serif;
         line-height: 1;
+        background: #111;
     }
 
     #app {
@@ -22,14 +23,42 @@
         justify-content: center;
 
         h1 {
-            font-size: 64px;
+            font-size: 32px;
             margin: 0;
+            font-weight: normal;
+            color: #CCC;
         }
 
         button {
             width: 120px;
             height: 80px;
-            margin: 48px 0 112px 0;
+        }
+
+        .button {
+
+            margin: 32px 0 64px 0;
+            position: relative;
+            width: 267px;
+            height: 168px;
+            border-radius: 24px;
+            overflow: hidden;
+
+            img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                opacity: 0;
+
+                &.active {
+                    opacity: 1;
+                }
+
+            }
+
+
+
         }
 
     }
@@ -44,7 +73,13 @@
 <template>
     <div id="app">
         <h1>{{ count }}</h1>
-        <button @click="count++">Click</button>
+
+        <div class="button" @click="click">
+            <template v-for="n in frames">
+                <img :class="{ active: n === frame + 1 }" :src="`/gif/${n}.png`">
+            </template>
+        </div>
+
     </div>
 </template>
 
@@ -59,10 +94,14 @@
 
     const cached = +localStorage.getItem('count');
     const count = ref(cached || 0);
+    const frame = ref(1);
+    const frames = 6;
 
-    watch(count, value => {
-        localStorage.setItem('count', value)
-    })
-
+    function click () {
+        count.value++;
+        localStorage.setItem('count', count.value);
+        frame.value++;
+        frame.value %= frames;
+    }
 
 </script>
