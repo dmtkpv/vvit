@@ -2,6 +2,9 @@
   "name": "vvit",
   "scripts": {
     "app": "pnpm --filter @vvit/app",
-    "bot": "pnpm --filter @vvit/bot"
+    "bot": "NODE_OPTIONS='--require dotenv/config' pnpm --filter @vvit/bot"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
   }
 }

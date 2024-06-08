@@ -1,37 +1,38 @@
-import TelegramBot from 'node-telegram-bot-api'
+import Bot from 'node-telegram-bot-api'
 
-// Replace 'YOUR_TOKEN' with your bot's API token
-const TOKEN = '7376362883:AAH7CF7q35ZAcprO8fbBluDvGg0-ybAKWps';
-const WEB_APP_URL = 'https://vvit.netlify.app/';
 
-// Create a bot that uses 'polling' to fetch new updates
-const bot = new TelegramBot(TOKEN, { polling: true });
+const { BOT_TOKEN } = process.env;
 
-// Matches "/start"
-bot.onText(/\/start/, (msg) => {
-    const chatId = msg.chat.id;
-    const firstName = msg.from.first_name;
+const bot = new Bot(BOT_TOKEN, {
+    polling: true
+});
 
-    console.log(`User ${firstName} started the bot.`);
+function onStart ({ chat }) {
 
-    // Inline keyboard button to open the web app
-    const opts = {
+    console.log('Start')
+
+    bot.sendMessage(chat.id, 'Тут будет описания, потом три кнопки:', {
         reply_markup: {
             inline_keyboard: [
-                [
-                    {
-                        text: 'Open Web App',
-                        url: WEB_APP_URL
-                    }
-                ]
+                [{ text: 'Играть', web_app: { url: "https://vvit.netlify.app" } }],
+                [{ text: 'Подписаться на канал', url: 'https://t.me/hamster_kombat' }],
+                [{ text: 'Как играть', callback_data: 'info' }]
             ]
         }
-    };
+    });
+}
 
-    bot.sendMessage(chatId, 'Welcome! Click the button below to open the web app:', opts);
-});
+function onInfo (query) {
+    bot.sendMessage(query.message.chat.id, 'Тут будут правила игры и еще что-то.', {
+        reply_markup: {
+            inline_keyboard: [
+                [{ text: 'Играть', web_app: { url: "https://vvit.netlify.app" } }],
+                [{ text: 'Подписаться на канал', url: 'https://t.me/hamster_kombat' }]
+            ]
+        }
+    });
+}
 
-// Log any errors
-bot.on('polling_error', (error) => {
-    console.error(error);
-});
+bot.onText(/\/start/, onStart);
+bot.on('callback_query', onInfo);
+
