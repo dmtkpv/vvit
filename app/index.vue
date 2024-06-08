@@ -12,7 +12,8 @@
 -->
 
 <template>
-    <div>Vvit</div>
+    <div>{{ count }}</div>
+    <button @click="count++">Click</button>
 </template>
 
 
@@ -21,5 +22,15 @@
 -->
 
 <script setup>
+
+    import { ref, watch } from 'vue'
+
+    const cached = +localStorage.getItem('count');
+    const count = ref(cached || 0);
+
+    watch(count, value => {
+        localStorage.setItem('count', value)
+    })
+
 
 </script>
