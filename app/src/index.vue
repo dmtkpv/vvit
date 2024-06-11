@@ -83,6 +83,7 @@
             margin: $space 0 calc($font + $space) 0;
             img {
                 width: 100%;
+                pointer-events: none;
             }
             &:active img {
                 -webkit-filter: drop-shadow(0 0 8px #9E7028);
@@ -103,7 +104,7 @@
 
         <h1>{{ count }}</h1>
 
-        <a @touchstart.prevent @click="click">
+        <a @click="click">
             <img src="/btn.png">
         </a>
 
