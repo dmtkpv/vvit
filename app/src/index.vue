@@ -85,7 +85,7 @@
                 width: 100%;
                 pointer-events: none;
             }
-            &:active img {
+            &:active img, &:hover img {
                 -webkit-filter: drop-shadow(0 0 8px #9E7028);
             }
         }
