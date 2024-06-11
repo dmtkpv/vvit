@@ -104,7 +104,7 @@
 
         <h1>{{ count }}</h1>
 
-        <a @click="click">
+        <a @touchend="click">
             <img src="/btn.png">
         </a>
 
