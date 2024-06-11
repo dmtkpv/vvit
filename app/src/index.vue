@@ -75,7 +75,6 @@
             font-size: $font;
             font-weight: 300;
             line-height: 1;
-            color: #F4D27D;
         }
 
         a {
@@ -103,8 +102,9 @@
     <div id="app">
 
         <h1>{{ count }}</h1>
+        <p>{{ startTouches }} / {{ endTouches }}</p>
 
-        <a @touchend="click">
+        <a @touchstart="start" @touchend="end">
             <img src="/btn.png">
         </a>
 
@@ -122,10 +122,17 @@
 
     const cached = +localStorage.getItem('count');
     const count = ref(cached || 0);
+    const startTouches = ref(0);
+    const endTouches = ref(0);
 
-    function click () {
+    function end (event) {
+        endTouches.value = event.touches.length
         count.value++;
         localStorage.setItem('count', count.value);
+    }
+
+    function start (event) {
+        startTouches.value = event.touches.length
     }
 
 </script>
