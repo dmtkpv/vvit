@@ -84,7 +84,7 @@
                 width: 100%;
                 pointer-events: none;
             }
-            &:active img, &:hover img {
+            &.active img {
                 -webkit-filter: drop-shadow(0 0 8px #9E7028);
             }
         }
@@ -104,7 +104,7 @@
         <h1>{{ count }}</h1>
         <p>{{ startTouches }} / {{ endTouches }}</p>
 
-        <a @touchstart="start" @touchend="end">
+        <a @touchstart="start" @touchend="end" :class="{ active }">
             <img src="/btn.png">
         </a>
 
@@ -122,17 +122,18 @@
 
     const cached = +localStorage.getItem('count');
     const count = ref(cached || 0);
+    const active = ref(false);
     const startTouches = ref(0);
     const endTouches = ref(0);
 
     function end (event) {
-        endTouches.value = event.touches.length
+        active.value = !!event.touches.length;
         count.value++;
         localStorage.setItem('count', count.value);
     }
 
     function start (event) {
-        startTouches.value = event.touches.length
+        active.value = true;
     }
 
 </script>
