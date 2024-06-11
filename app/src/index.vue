@@ -85,7 +85,7 @@
                 pointer-events: none;
             }
             &.active img {
-                -webkit-filter: drop-shadow(0 0 8px #9E7028);
+                -webkit-filter: drop-shadow(0 0 16px #9E7028);
             }
         }
 
@@ -102,7 +102,6 @@
     <div id="app">
 
         <h1>{{ count }}</h1>
-        <p>{{ startTouches }} / {{ endTouches }}</p>
 
         <a @touchstart="start" @touchend="end" :class="{ active }">
             <img src="/btn.png">
