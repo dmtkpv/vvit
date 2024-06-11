@@ -103,7 +103,7 @@
 
         <h1>{{ count }}</h1>
 
-        <a @click="click">
+        <a @touchstart.prevent @click="click">
             <img src="/btn.png">
         </a>
 
